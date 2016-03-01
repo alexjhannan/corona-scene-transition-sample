@@ -1,7 +1,3 @@
-physics.start()
-
-physics.setGravity(0,0)
-
 function createPlayer(x, y, width, height, rotation)
     local p = display.newRect( x, y, width, height )
     p:setFillColor( 0, 1, 0 )
@@ -48,10 +44,6 @@ end
 
 local function onTapLeft()
 	player.x = player.x - 10
-end
-
-local function test()
-	print('yo')
 end
 
 controlUp:addEventListener('tap', onTapUp)
