@@ -1,6 +1,12 @@
 -- pull in the composer
 local composer = require 'composer'
 
+-- load player by pulling from the player module
+local player = require 'player'
+
+-- load controls from control module
+local controls = require 'controls'
+
 -- create a new scene object; store locally
 local scene = composer.newScene()
 
@@ -25,17 +31,13 @@ function scene:show( event )
     composer.removeHidden(false)
 
     if ( phase == "will" ) then
-
-        -- load player by pulling from the player module
-        local player = require 'player'
+        
         -- insert the player into the sceneGroup (so it is removed upon scene transition)
         sceneGroup:insert(player)
         -- set player location
         player.x = 100
         player.y = 100
 
-        -- load controls from control module
-        local controls = require 'controls'
         -- apply controls to the player object (note that the variable now references the initialized controls object, NOT the controlWrapper returned by 'require "controls"')
         controls = controls(player)
         -- attach controls to the sceneGroup

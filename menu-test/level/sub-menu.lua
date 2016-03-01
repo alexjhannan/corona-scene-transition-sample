@@ -1,5 +1,7 @@
 -- this file is virtually identical to main-menu.lua; see main-menu.lua for comments
-local composer = require( "composer" )
+local composer = require 'composer'
+local controls = require 'controls'
+local player = require 'player'
 
 local scene = composer.newScene()
 
@@ -20,14 +22,10 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         
-        local player = require 'player'
-
         sceneGroup:insert(player)
 
         player.x = 200
         player.y = 150
-
-        local controls = require 'controls'
 
         controls = controls(player)
 
