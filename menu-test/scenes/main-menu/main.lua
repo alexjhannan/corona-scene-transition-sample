@@ -1,11 +1,11 @@
 -- pull in the composer
 local composer = require 'composer'
 
--- load player by pulling from the player module
-local player = require 'player'
-
 -- load controls from control module
-local controls = require 'controls'
+local controls = require 'engine.controls.controls'
+
+-- load player by pulling from the player module
+local player = require 'engine.player.player'
 
 -- create a new scene object; store locally
 local scene = composer.newScene()
@@ -55,7 +55,7 @@ function scene:show( event )
                 }
             }
             -- invoke composer to change scenes
-            composer.gotoScene('level.sub-menu', options)
+            composer.gotoScene('scenes.sub-menu.main', options)
         end
         -- create a circle (note: this is also attached to sceneGroup!)
         local circle = display.newCircle(sceneGroup, display.contentWidth/2, display.contentHeight/5*3, 30)

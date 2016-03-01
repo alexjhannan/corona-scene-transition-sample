@@ -10,7 +10,7 @@
 local composer = require 'composer'
 
 -- pull in physics configuration module
-local physicsConfig = require 'physics-config'
+local physicsConfig = require 'engine.physics-config'
 
 -- go to the main menu scene
-composer.gotoScene('level.main-menu')
+composer.gotoScene('scenes.main-menu.main')

@@ -1,7 +1,7 @@
 -- this file is virtually identical to main-menu.lua; see main-menu.lua for comments
 local composer = require 'composer'
-local controls = require 'controls'
-local player = require 'player'
+local controls = require 'engine.controls.controls'
+local player = require 'engine.player.player'
 
 local scene = composer.newScene()
 
@@ -41,7 +41,7 @@ function scene:show( event )
                 }
             }
 
-            timer.performWithDelay(100, composer.gotoScene('level.main-menu', options))
+            timer.performWithDelay(100, composer.gotoScene('scenes.main-menu.main', options))
         end
         -- circle for clickin'
         local circle = display.newCircle(sceneGroup, display.contentWidth/2, display.contentHeight/5*4, 30)
