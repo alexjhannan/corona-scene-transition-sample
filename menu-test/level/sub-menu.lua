@@ -27,6 +27,12 @@ function scene:show( event )
         player.x = 200
         player.y = 150
 
+        local controls = require 'controls'
+
+        controls = controls(player)
+
+        sceneGroup:insert(controls)
+
         local function transitionScene ()
             local options = {
                 effect = "fade",

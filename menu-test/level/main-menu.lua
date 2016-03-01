@@ -34,9 +34,16 @@ function scene:show( event )
         player.x = 100
         player.y = 100
 
+        -- load controls from control module
+        local controls = require 'controls'
+        -- apply controls to the player object (note that the variable now references the initialized controls object, NOT the controlWrapper returned by 'require "controls"')
+        controls = controls(player)
+        -- attach controls to the sceneGroup
+        sceneGroup:insert(controls)
 
-
+        -- transitions the scene
         local function transitionScene ()
+            -- animation options for scene transition. parameters can be passed from scene to scene with the 'params' key
             local options = {
                 effect = "fade",
                 time = 500,
@@ -45,7 +52,7 @@ function scene:show( event )
                     someOtherKey = 10
                 }
             }
-
+            -- invoke composer to change scenes
             composer.gotoScene('level.sub-menu', options)
         end
         -- create a circle (note: this is also attached to sceneGroup!)
