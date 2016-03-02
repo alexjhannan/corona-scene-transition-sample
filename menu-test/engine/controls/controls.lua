@@ -12,12 +12,7 @@ function controlWrapper(player)
 	controlLeft:setFillColor(0,0, 1)
 	local controlDown = display.newRect(controls, display.viewableContentWidth/5, display.viewableContentHeight/6*4.5 + 25, 25, 25)
 	controlDown:setFillColor(0,0, 1)
-
-
-
-    
-
-
+	
 	-- callback functions for controls
 	local function onTapUp() 
 		player.anim:setSequence("up")
