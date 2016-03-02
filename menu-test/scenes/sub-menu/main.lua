@@ -1,7 +1,6 @@
--- this file is virtually identical to main-menu.lua; see main-menu.lua for comments
+-- this file is virtually identical to main-menu's main.lua; see main-menu for comments
 local composer = require 'composer'
 local controls = require 'engine.controls.controls'
--- local player = require 'engine.player.player'
 local generateCharacter = require 'engine.player.character'
 
 local scene = composer.newScene()
@@ -23,16 +22,12 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         
-        -- character
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         character.group.x = math.random( 50, display.contentWidth - 50 )
         character.group.y = math.random( 50, display.contentHeight - 50 )
 
-        -- insert the character into the sceneGroup (so it is removed upon scene transition)
         sceneGroup:insert(character.group)
-        -- apply controls to the player object (note that the variable now references the initialized controls object, NOT the controlWrapper returned by 'require "controls"')
         controls = controls(character)
-        -- attach controls to the sceneGroup
         sceneGroup:insert(controls)
 
         local function transitionScene ()
