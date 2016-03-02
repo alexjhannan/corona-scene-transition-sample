@@ -15,6 +15,8 @@ function generateControls(character)
 
 	-- callback functions for controls
 	local function onTapUp()
+		-- return immediately without animation if an animation is already playing
+		if character.sprite.isPlaying == true then return true end
 		-- 1) set sprite sequence to the correct direction
 		-- 2) play the animation
 		-- 3) set object's linear velocity
@@ -28,7 +30,8 @@ function generateControls(character)
 				character.sprite:pause()
 				character.object:setLinearVelocity(0, 0) end)
 	end
-	local function onTapRight() 
+	local function onTapRight()
+		if character.sprite.isPlaying == true then return true end
 		character.sprite:setSequence("right")
 		character.sprite:play()
 		character.object:setLinearVelocity(128, 0)
@@ -37,6 +40,7 @@ function generateControls(character)
 				character.object:setLinearVelocity(0, 0) end)
 	end
 	local function onTapDown() 
+		if character.sprite.isPlaying == true then return true end
 		character.sprite:setSequence("down")
 		character.sprite:play()
 		character.object:setLinearVelocity(0, 128)
@@ -45,6 +49,7 @@ function generateControls(character)
 				character.object:setLinearVelocity(0, 0) end)
 	end
 	local function onTapLeft() 
+		if character.sprite.isPlaying == true then return true end
 		character.sprite:setSequence("left")
 		character.sprite:play()
 		character.object:setLinearVelocity(-128, 0)
