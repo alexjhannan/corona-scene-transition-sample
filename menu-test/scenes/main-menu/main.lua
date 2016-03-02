@@ -1,13 +1,10 @@
 -- pull in the composer
 local composer = require 'composer'
 
--- load controls from control module
-local controls = require 'engine.controls.controls'
+-- load control generator to be initialized with a player object
+local generateControls = require 'engine.controls.controls'
 
--- load player by pulling from the player module
--- local player = require 'engine.player.player'
-
--- 
+-- load a character generator to be initialized with player information
 local generateCharacter = require 'engine.player.character'
 
 -- create a new scene object; store locally
@@ -29,29 +26,24 @@ function scene:show( event )
     local sceneGroup = self.view
     local phase = event.phase
 
-    -- this line is VERY IMPORTANT. without it, old physics bodies from the previous scene WILL NOT be removed, meaning unwanted collisions can take place and fire off non-existant event listeners
+    -- this line is VERY IMPORTANT. without it, old physics bodies from the previous scene WILL NOT be removed, 
+    -- meaning unwanted collisions can take place and fire off non-existant event listeners.
     -- seems to work best when called at this point in the scene transition flow
     composer.removeHidden(false)
 
-
-
-
     if ( phase == "will" ) then
-
-        -- ARCHIVED: original solution when using player instead of character
-        -- set player location
-        --player.x = 100
-        --player.y = 100
         
-        -- character
+        -- initialize the character with relevant information
+        -- character -> { object, anim }, where object is the display object, and anim is the animation sequence
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
-        character.group.x = math.random( 50, display.contentWidth - 50 )
-        character.group.y = math.random( 50, display.contentHeight - 50 )
+        -- set a static location (should be queried from tiled)
+        character.group.x = 100
+        character.group.y = 100
 
         -- insert the character into the sceneGroup (so it is removed upon scene transition)
         sceneGroup:insert(character.group)
-        -- apply controls to the player object (note that the variable now references the initialized controls object, NOT the controlWrapper returned by 'require "controls"')
-        controls = controls(character)
+        -- initialize controls from control generator by passing in the character object
+        local controls = generateControls(character)
         -- attach controls to the sceneGroup
         sceneGroup:insert(controls)
 
@@ -67,9 +59,9 @@ function scene:show( event )
                 }
             }
             -- invoke composer to change scenes
-            Runtime:removeEventListener("key", onKeyEvent)
             composer.gotoScene('scenes.sub-menu.main', options)
         end
+        
         -- create a circle (note: this is also attached to sceneGroup!)
         local circle = display.newCircle(sceneGroup, display.contentWidth/2, display.contentHeight/5*3, 30)
         -- build a collisionFilter table (see Corona documentation, collision filters are a bit wonky)
