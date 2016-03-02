@@ -15,7 +15,7 @@ local function generateCharacter( displayName, name, offset, appFont )
 		sheetContentHeight = 200
 	}
 
-	local sheet_character = graphics.newImageSheet( "sprites.png", sheetOptions )
+	local sheet_character = graphics.newImageSheet( "engine/player/images/sprites.png", sheetOptions )
 
 	local sequences_character = {
 		{
