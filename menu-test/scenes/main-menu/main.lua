@@ -38,13 +38,11 @@ function scene:show( event )
         
 
         --load map
-        local map = dusk.buildMap("maps/yi.json")
+        local map = dusk.buildMap("maps/parkdemo.json")
         sceneGroup:insert(map)
 
-        -- character
-
         -- initialize the character with relevant information
-        -- character -> { object, anim }, where object is the display object, and anim is the animation sequence
+        -- character -> { object, sprite }, where object is the display object, and sprite is the animation sequence
 
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         -- set a static location (should be queried from tiled)
