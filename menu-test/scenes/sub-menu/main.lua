@@ -3,6 +3,8 @@ local composer = require 'composer'
 local controls = require 'engine.controls.controls'
 local generateCharacter = require 'engine.player.character'
 
+local dusk = require("Dusk.Dusk")
+
 local scene = composer.newScene()
 
 function scene:create( event )
@@ -21,6 +23,9 @@ function scene:show( event )
     composer.removeHidden(false)
 
     if ( phase == "will" ) then
+
+        local map = dusk.buildMap("maps/house.json")
+        sceneGroup:insert(map)
         
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         character.object.x = 100
