@@ -54,8 +54,13 @@ local function generateCharacter( displayName, name, offset, appFont )
 	character:setFrame( 2 )
 	character:scale(4,4)
 
+	local characterCollisionFilter = { categoryBits = 2, maskBits = 5 }
+    local characterBodyElement = { filter=characterCollisionFilter }
+
 	group:insert( character, true )
 	character.dispGroup = group
+
+	physics.addBody(group, "dynamic", characterBodyElement )
 
 	local hpBg = display.newRect( group, 0, -4-character.height*0.5, 40, 8 )
 	hpBg:setFillColor( 0, 0, 0, 0.5 )

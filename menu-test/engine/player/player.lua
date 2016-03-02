@@ -11,6 +11,8 @@ function createPlayer(x, y, width, height, rotation)
     physics.addBody ( p, "dynamic", playerBodyElement )
     p.isSleepingAllowed = false
 
+    local object
+
     return p
 end
 

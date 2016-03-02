@@ -12,36 +12,39 @@ function controlWrapper(player)
 	controlLeft:setFillColor(0,0, 1)
 	local controlDown = display.newRect(controls, display.viewableContentWidth/5, display.viewableContentHeight/6*4.5 + 25, 25, 25)
 	controlDown:setFillColor(0,0, 1)
-	
+
 	-- callback functions for controls
 	local function onTapUp() 
 		player.anim:setSequence("up")
 		player.anim:play()
-		timer.performWithDelay(500, function() 
-				player.group.y = player.group.y - 10 
-				player.anim:pause() end)
+		player.group:setLinearVelocity(0, -128)
+		timer.performWithDelay(250, function() 
+				player.anim:pause()
+				player.group:setLinearVelocity(0, 0) end)
 	end
 	local function onTapRight() 
 		player.anim:setSequence("right")
 		player.anim:play()
-		timer.performWithDelay(500, function() 
-				player.group.x = player.group.x + 10 
-				player.anim:pause() end)
+		player.group:setLinearVelocity(128, 0)
+		timer.performWithDelay(250, function() 
+				player.anim:pause()
+				player.group:setLinearVelocity(0, 0) end)
 	end
 	local function onTapDown() 
 		player.anim:setSequence("down")
 		player.anim:play()
-		timer.performWithDelay(500, function() 
-				player.group.y = player.group.y + 10 
-				player.anim:pause() end)
+		player.group:setLinearVelocity(0, 128)
+		timer.performWithDelay(250, function() 
+				player.anim:pause()
+				player.group:setLinearVelocity(0, 0) end)
 	end
 	local function onTapLeft() 
 		player.anim:setSequence("left")
 		player.anim:play()
-		timer.performWithDelay(500, function() 
-				player.group.x = player.group.x - 10 
-				player.anim:pause() end)
-		print()
+		player.group:setLinearVelocity(-128, 0)
+		timer.performWithDelay(250, function() 
+				player.anim:pause()
+				player.group:setLinearVelocity(0, 0) end)
 	end
 
 
