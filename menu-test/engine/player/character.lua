@@ -1,12 +1,17 @@
+-- generateCharacter returns a table with two values:
+
+-- object stores the display object, which has a physics body w/ collision
+-- -> for instance, access character.object.x to change the x location of the object
+
+-- sprite stores the sprite graphic of the character, which has sequences and frames and stuff
+-- -> for instance, use character.sprite:play() to start the sprite's current sequence
+
 local function generateCharacter( displayName, name, offset, appFont )
 
-	print("generateCharacter called")
-
-	local group = display.newGroup()
+	local object = display.newGroup()
 
 	local selOffset = (( (offset or math.random(4)) + 1 ) % 4) * 4
 
-	-- Create our player sprite sheet
 	local sheetOptions = {
 		width = 50,
 		height = 50,
@@ -15,9 +20,10 @@ local function generateCharacter( displayName, name, offset, appFont )
 		sheetContentHeight = 200
 	}
 
-	local sheet_character = graphics.newImageSheet( "engine/player/images/sprites.png", sheetOptions )
 
-	local sequences_character = {
+	local sheet_sprite = graphics.newImageSheet( "engine/player/images/sprites.png", sheetOptions )
+
+	local sequences_sprite = {
 		{
 			name = "down",
 			frames = { 1+selOffset, 2+selOffset, 3+selOffset, 1+selOffset, 2+selOffset, 4+selOffset },
@@ -48,41 +54,34 @@ local function generateCharacter( displayName, name, offset, appFont )
 		},
 	}
 
-	-- And, create the player that it belongs to
-	local character = display.newSprite( sheet_character, sequences_character )
-	character:setSequence( "right" )
-	character:setFrame( 2 )
-	character:scale(4,4)
+	-- make a new sprite from spriteSheet w/ options
+	local sprite = display.newSprite( sheet_sprite, sequences_sprite )
+	-- set the default sequence (which direction to face)
+	sprite:setSequence( "right" )
+	-- set the specific frame of the sequence
+	sprite:setFrame(1)
+	-- insert the sprite into object (true sets sprite position relative to the object)
+	object:insert(sprite, true)
 
-	local characterCollisionFilter = { categoryBits = 2, maskBits = 5 }
-    local characterBodyElement = { filter=characterCollisionFilter }
+	-- create options for physics.addBody
+	local objectCollisionFilter = { categoryBits = 2, maskBits = 5 }
+    local objectBodyElement = { filter=objectCollisionFilter }
+	
+    -- add a physics body to the object
+	physics.addBody(object, "dynamic", objectBodyElement )
 
-	group:insert( character, true )
-	character.dispGroup = group
-
-	physics.addBody(group, "dynamic", characterBodyElement )
-
+	-- styling the name & displayName
 	if name then
-		local playerName = display.newText( { parent=group, text=name, x=0, y=-18-character.height*0.5, font=appFont, fontSize=20 } )
+		local playerName = display.newText( { parent=object, text=name, x=0, y=-18-sprite.height*0.5, font=appFont, fontSize=20 } )
 		playerName.anchorY = 1
 	end
 
 	if displayName then
-		local playerDisplayName = display.newText( { parent=group, text=displayName, x=0, y=-0-character.height*0.5, font=appFont, fontSize=15 } )
+		local playerDisplayName = display.newText( { parent=object, text=displayName, x=0, y=-0-sprite.height*0.5, font=appFont, fontSize=15 } )
 		playerDisplayName.anchorY = 1
 	end
 
-	return { group=group,anim=character }
+	return { object=object, sprite=sprite }
 end
 
---local character = generateCharacter("Jedi","right",1,"Helvetica")
---character.group.x = math.random( 50, display.contentWidth - 50 )
---character.group.y = math.random( 50, display.contentHeight - 50 )
-
 return generateCharacter
-
-
---local sprite = generateCharacter("Jedi","right",1,"Helvetica")
-
---sprite.group.x = math.random( 50, display.contentWidth - 50 )
---sprite.group.y = math.random( 50, display.contentHeight - 50 )

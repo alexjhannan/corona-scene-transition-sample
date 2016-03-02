@@ -1,9 +1,9 @@
--- this file returns a function which takes an object, the player, so that it can initialize the controls
-function controlWrapper(player)
-	-- create a display group for the controls
+-- this file returns a function which takes an object, the character, so that it can initialize the controls
+function generateControls(character)
+	-- create a display object for the controls
 	local controls = display.newGroup()
 
-	-- one rectangle for each direction
+	-- one rectangle for each direction (currently uses global coordinates, but should be created with coordinates relative to the 'controls' display group)
 	local controlUp = display.newRect(controls, display.viewableContentWidth/5, display.viewableContentHeight/6*4.5 - 25, 25, 25)
 	controlUp:setFillColor(0,0, 1)
 	local controlRight = display.newRect(controls, display.viewableContentWidth/5 + 25, display.viewableContentHeight/6*4.5, 25, 25)
@@ -14,37 +14,43 @@ function controlWrapper(player)
 	controlDown:setFillColor(0,0, 1)
 
 	-- callback functions for controls
-	local function onTapUp() 
-		player.anim:setSequence("up")
-		player.anim:play()
-		player.group:setLinearVelocity(0, -128)
+	local function onTapUp()
+		-- 1) set sprite sequence to the correct direction
+		-- 2) play the animation
+		-- 3) set object's linear velocity
+		-- 4) activate a timer
+			-- pause the animation
+			-- set the velocity to zero
+		character.sprite:setSequence("up")
+		character.sprite:play()
+		character.object:setLinearVelocity(0, -128)
 		timer.performWithDelay(250, function() 
-				player.anim:pause()
-				player.group:setLinearVelocity(0, 0) end)
+				character.sprite:pause()
+				character.object:setLinearVelocity(0, 0) end)
 	end
 	local function onTapRight() 
-		player.anim:setSequence("right")
-		player.anim:play()
-		player.group:setLinearVelocity(128, 0)
+		character.sprite:setSequence("right")
+		character.sprite:play()
+		character.object:setLinearVelocity(128, 0)
 		timer.performWithDelay(250, function() 
-				player.anim:pause()
-				player.group:setLinearVelocity(0, 0) end)
+				character.sprite:pause()
+				character.object:setLinearVelocity(0, 0) end)
 	end
 	local function onTapDown() 
-		player.anim:setSequence("down")
-		player.anim:play()
-		player.group:setLinearVelocity(0, 128)
+		character.sprite:setSequence("down")
+		character.sprite:play()
+		character.object:setLinearVelocity(0, 128)
 		timer.performWithDelay(250, function() 
-				player.anim:pause()
-				player.group:setLinearVelocity(0, 0) end)
+				character.sprite:pause()
+				character.object:setLinearVelocity(0, 0) end)
 	end
 	local function onTapLeft() 
-		player.anim:setSequence("left")
-		player.anim:play()
-		player.group:setLinearVelocity(-128, 0)
+		character.sprite:setSequence("left")
+		character.sprite:play()
+		character.object:setLinearVelocity(-128, 0)
 		timer.performWithDelay(250, function() 
-				player.anim:pause()
-				player.group:setLinearVelocity(0, 0) end)
+				character.sprite:pause()
+				character.object:setLinearVelocity(0, 0) end)
 	end
 
 	--[[ Keyboard controls commented out (only used for development)
@@ -92,7 +98,7 @@ function controlWrapper(player)
 	end -- ]]
 	
 
-	-- attach event listeners
+	-- attach event listeners to control taps
 	controlUp:addEventListener('touch', onTapUp)
 	controlRight:addEventListener('touch', onTapRight)
 	controlDown:addEventListener('touch', onTapDown)
@@ -106,4 +112,4 @@ function controlWrapper(player)
 end
 
 -- return the function wrapper when required
-return controlWrapper
+return generateControls

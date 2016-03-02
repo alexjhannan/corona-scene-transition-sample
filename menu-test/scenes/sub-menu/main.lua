@@ -23,10 +23,10 @@ function scene:show( event )
     if ( phase == "will" ) then
         
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
-        character.group.x = math.random( 50, display.contentWidth - 50 )
-        character.group.y = math.random( 50, display.contentHeight - 50 )
+        character.object.x = 100
+        character.object.y = 100
 
-        sceneGroup:insert(character.group)
+        sceneGroup:insert(character.object)
         controls = controls(character)
         sceneGroup:insert(controls)
 
