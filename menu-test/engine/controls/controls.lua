@@ -13,25 +13,9 @@ function controlWrapper(player)
 	local controlDown = display.newRect(controls, display.viewableContentWidth/5, display.viewableContentHeight/6*4.5 + 25, 25, 25)
 	controlDown:setFillColor(0,0, 1)
 
-	-- KeyBoard Control
-	local function onKeyEvent( event )
-    -- Print which key was pressed down/up
-    local message = "Key '" .. event.keyName .. "' was pressed " .. event.phase
-    print( message )
 
-    -- If the "back" key was pressed on Android or Windows Phone, prevent it from backing out of the app
-    if ( event.keyName == "back" ) then
-        local platformName = system.getInfo( "platformName" )
-        if ( platformName == "Android" ) or ( platformName == "WinPhone" ) then
-            return true
-        end
-    end
 
-    -- IMPORTANT! Return false to indicate that this app is NOT overriding the received key
-    -- This lets the operating system execute its default handling of the key
-    return false
-	end
-	
+    
 
 
 	-- callback functions for controls
@@ -51,6 +35,51 @@ function controlWrapper(player)
 		player.group.x = player.group.x - 10 
 		player.anim:setSequence("left") 
 	end
+
+
+	-- KeyBoard Control
+	local function onKeyEvent( event )
+    -- Print which key was pressed down/up
+    local message = "Key '" .. event.keyName .. "' was pressed " .. event.phase
+    print( message )
+
+    -- If the "back" key was pressed on Android or Windows Phone, prevent it from backing out of the app
+    if ( event.keyName == "down" ) then
+        local platformName = system.getInfo( "platformName" )
+        if ( platformName == "Android" ) or ( platformName == "WinPhone" ) then
+            return true
+        end
+        onTapDown()
+    end
+
+    if ( event.keyName == "up" ) then
+        local platformName = system.getInfo( "platformName" )
+        if ( platformName == "Android" ) or ( platformName == "WinPhone" ) then
+            return true
+        end
+        onTapUp()
+    end
+
+    if ( event.keyName == "right" ) then
+        local platformName = system.getInfo( "platformName" )
+        if ( platformName == "Android" ) or ( platformName == "WinPhone" ) then
+            return true
+        end
+        onTapRight()
+    end
+
+    if ( event.keyName == "left" ) then
+        local platformName = system.getInfo( "platformName" )
+        if ( platformName == "Android" ) or ( platformName == "WinPhone" ) then
+            return true
+        end
+        onTapLeft()
+    end
+    -- IMPORTANT! Return false to indicate that this app is NOT overriding the received key
+    -- This lets the operating system execute its default handling of the key
+    return false
+	end
+	
 
 	-- attach event listeners
 	controlUp:addEventListener('tap', onTapUp)
