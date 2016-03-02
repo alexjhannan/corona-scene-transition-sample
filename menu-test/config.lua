@@ -3,9 +3,14 @@
 local aspectRatio = display.pixelHeight / display.pixelWidth
 
 application = {
+	orientation =
+    {
+        default = "landscapeRight",
+        supported = {"landscapeRight", "landscapeLeft"}
+    },
 	content = {
-		width = aspectRatio > 1.5 and 800 or math.ceil(1200 / aspectRatio),
-		height = aspectRatio < 1.5 and 1200 or math.ceil(800 * aspectRatio),
+		width = aspectRatio > 1.5 and 320 or math.ceil(480 / aspectRatio),
+		height = aspectRatio < 1.5 and 480 or math.ceil(320 * aspectRatio),
 		scale = "letterBox",
 		fps = 60,
 

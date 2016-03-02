@@ -63,12 +63,12 @@ local function generateCharacter( displayName, name, offset, appFont )
 	physics.addBody(group, "dynamic", characterBodyElement )
 
 	if name then
-		local playerName = display.newText( { parent=group, text=name, x=0, y=-18-character.height*0.5, font=appFont, fontSize=11 } )
+		local playerName = display.newText( { parent=group, text=name, x=0, y=-18-character.height*0.5, font=appFont, fontSize=20 } )
 		playerName.anchorY = 1
 	end
 
 	if displayName then
-		local playerDisplayName = display.newText( { parent=group, text=displayName, x=0, y=-10-character.height*0.5, font=appFont, fontSize=7 } )
+		local playerDisplayName = display.newText( { parent=group, text=displayName, x=0, y=-0-character.height*0.5, font=appFont, fontSize=15 } )
 		playerDisplayName.anchorY = 1
 	end
 

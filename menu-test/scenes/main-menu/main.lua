@@ -44,7 +44,7 @@ function scene:show( event )
         --player.y = 100
         
         -- character
-        local character = generateCharacter("Jedi","right",1,"Helvetica")
+        local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         character.group.x = math.random( 50, display.contentWidth - 50 )
         character.group.y = math.random( 50, display.contentHeight - 50 )
 
