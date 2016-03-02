@@ -57,12 +57,6 @@ local function generateCharacter( displayName, name, offset, appFont )
 	group:insert( character, true )
 	character.dispGroup = group
 
-	local hpBg = display.newRect( group, 0, -4-character.height*0.5, 40, 8 )
-	hpBg:setFillColor( 0, 0, 0, 0.5 )
-
-	local hpFg = display.newRect( group, 0, -4-character.height*0.5, 38, 6 )
-	hpFg:setFillColor( 0.2, 0.85, 0.4 )
-
 	if name then
 		local playerName = display.newText( { parent=group, text=name, x=0, y=-18-character.height*0.5, font=appFont, fontSize=11 } )
 		playerName.anchorY = 1
@@ -73,12 +67,7 @@ local function generateCharacter( displayName, name, offset, appFont )
 		playerDisplayName.anchorY = 1
 	end
 
-	local function setHp( hp )
-		hpFg.width = 38*hp/100
-		hpFg:setFillColor( 100/hp, hp/100, 0 )
-	end
-
-	return { group=group, hp=setHp, anim=character }
+	return { group=group,anim=character }
 end
 
 --local character = generateCharacter("Jedi","right",1,"Helvetica")
