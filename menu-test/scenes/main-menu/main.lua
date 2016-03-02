@@ -67,6 +67,7 @@ function scene:show( event )
                 }
             }
             -- invoke composer to change scenes
+            Runtime:removeEventListener("key", onKeyEvent)
             composer.gotoScene('scenes.sub-menu.main', options)
         end
         -- create a circle (note: this is also attached to sceneGroup!)

@@ -47,7 +47,7 @@ function controlWrapper(player)
 				player.group:setLinearVelocity(0, 0) end)
 	end
 
-
+	--[[ Keyboard controls commented out (only used for development)
 	-- KeyBoard Control
 	local function onKeyEvent( event )
     -- Print which key was pressed down/up
@@ -89,15 +89,17 @@ function controlWrapper(player)
     -- IMPORTANT! Return false to indicate that this app is NOT overriding the received key
     -- This lets the operating system execute its default handling of the key
     return false
-	end
+	end -- ]]
 	
 
 	-- attach event listeners
-	controlUp:addEventListener('tap', onTapUp)
-	controlRight:addEventListener('tap', onTapRight)
-	controlDown:addEventListener('tap', onTapDown)
-	controlLeft:addEventListener('tap', onTapLeft)
-	Runtime:addEventListener( "key", onKeyEvent )
+	controlUp:addEventListener('touch', onTapUp)
+	controlRight:addEventListener('touch', onTapRight)
+	controlDown:addEventListener('touch', onTapDown)
+	controlLeft:addEventListener('touch', onTapLeft)
+	
+	-- Keypress commented out (only used for development)
+	-- Runtime:addEventListener( "key", onKeyEvent )
 
 	-- and return the (now initialized) controls
 	return controls
