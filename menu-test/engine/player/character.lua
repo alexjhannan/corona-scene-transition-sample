@@ -81,11 +81,11 @@ local function generateCharacter( displayName, name, offset, appFont )
 	return { group=group, hp=setHp, anim=character }
 end
 
-local character = generateCharacter("Jedi","right",1,"Helvetica")
-character.group.x = math.random( 50, display.contentWidth - 50 )
-character.group.y = math.random( 50, display.contentHeight - 50 )
+--local character = generateCharacter("Jedi","right",1,"Helvetica")
+--character.group.x = math.random( 50, display.contentWidth - 50 )
+--character.group.y = math.random( 50, display.contentHeight - 50 )
 
-return character
+return generateCharacter
 
 
 --local sprite = generateCharacter("Jedi","right",1,"Helvetica")

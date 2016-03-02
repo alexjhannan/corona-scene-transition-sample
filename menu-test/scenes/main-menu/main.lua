@@ -8,7 +8,7 @@ local controls = require 'engine.controls.controls'
 local player = require 'engine.player.player'
 
 -- 
-local character = require 'engine.player.character'
+local generateCharacter = require 'engine.player.character'
 
 -- create a new scene object; store locally
 local scene = composer.newScene()
@@ -33,16 +33,24 @@ function scene:show( event )
     -- seems to work best when called at this point in the scene transition flow
     composer.removeHidden(false)
 
+
+
+
     if ( phase == "will" ) then
         
+        -- charactar
+        local character = generateCharacter("Jedi","right",1,"Helvetica")
+        character.group.x = math.random( 50, display.contentWidth - 50 )
+        character.group.y = math.random( 50, display.contentHeight - 50 )
+
         -- insert the player into the sceneGroup (so it is removed upon scene transition)
-        sceneGroup:insert(player)
+        sceneGroup:insert(character.group)
         -- set player location
-        player.x = 100
-        player.y = 100
+        --player.x = 100
+        --player.y = 100
 
         -- apply controls to the player object (note that the variable now references the initialized controls object, NOT the controlWrapper returned by 'require "controls"')
-        controls = controls(player)
+        controls = controls(character.group)
         -- attach controls to the sceneGroup
         sceneGroup:insert(controls)
 
