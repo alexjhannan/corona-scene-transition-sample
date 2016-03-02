@@ -64,8 +64,9 @@ local function generateCharacter( displayName, name, offset, appFont )
 
 	-- And, create the player that it belongs to
 	local character = display.newSprite( sheet_character, sequences_character )
-	character:setSequence( "down" )
+	character:setSequence( "right" )
 	character:setFrame( 2 )
+	character:scale(4,4)
 
 	group:insert( character, true )
 	character.dispGroup = group
@@ -94,7 +95,12 @@ local function generateCharacter( displayName, name, offset, appFont )
 	return { group=group, hp=setHp, anim=character }
 end
 
-generateCharacter("Jedi","right",1,"HelveticaNeue-Light")
+local sprite = generateCharacter("Jedi","right",1,"Helvetica")
+
+sprite.group.x = math.random( 50, display.contentWidth - 50 )
+sprite.group.y = math.random( 50, display.contentHeight - 50 )
+
+--scene.view:insert( sprite.group)
 
 -- go to the main menu scene
 -- composer.gotoScene('scenes.main-menu.main')
