@@ -1,7 +1,8 @@
 -----------------------------------------------------------------------------------------
 --
 -- main.lua
---
+-- hides status bar, loads composer, initializes physics engine
+-- transition to main menu scene
 -----------------------------------------------------------------------------------------
  -- hide status bar
  display.setStatusBar( display.HiddenStatusBar )
