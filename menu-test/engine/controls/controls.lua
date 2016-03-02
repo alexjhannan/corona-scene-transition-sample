@@ -14,10 +14,22 @@ function controlWrapper(player)
 	controlDown:setFillColor(0,0, 1)
 
 	-- callback functions for controls
-	local function onTapUp() player.y = player.y - 10 end
-	local function onTapRight() player.x = player.x + 10 end
-	local function onTapDown() player.y = player.y + 10 end
-	local function onTapLeft() player.x = player.x - 10 end
+	local function onTapUp() 
+		player.group.y = player.group.y - 10
+		player.anim:setSequence("up") 
+	end
+	local function onTapRight() 
+		player.group.x = player.group.x + 10 
+		player.anim:setSequence("right") 
+	end
+	local function onTapDown() 
+		player.group.y = player.group.y + 10 
+		player.anim:setSequence("down") 
+	end
+	local function onTapLeft() 
+		player.group.x = player.group.x - 10 
+		player.anim:setSequence("left") 
+	end
 
 	-- attach event listeners
 	controlUp:addEventListener('tap', onTapUp)
