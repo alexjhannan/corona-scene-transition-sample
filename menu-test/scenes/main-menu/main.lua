@@ -37,11 +37,11 @@ function scene:show( event )
         -- character -> { object, anim }, where object is the display object, and anim is the animation sequence
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         -- set a static location (should be queried from tiled)
-        character.group.x = 100
-        character.group.y = 100
+        character.object.x = 100
+        character.object.y = 100
 
         -- insert the character into the sceneGroup (so it is removed upon scene transition)
-        sceneGroup:insert(character.group)
+        sceneGroup:insert(character.object)
         -- initialize controls from control generator by passing in the character object
         local controls = generateControls(character)
         -- attach controls to the sceneGroup
@@ -61,7 +61,7 @@ function scene:show( event )
             -- invoke composer to change scenes
             composer.gotoScene('scenes.sub-menu.main', options)
         end
-        
+
         -- create a circle (note: this is also attached to sceneGroup!)
         local circle = display.newCircle(sceneGroup, display.contentWidth/2, display.contentHeight/5*3, 30)
         -- build a collisionFilter table (see Corona documentation, collision filters are a bit wonky)
