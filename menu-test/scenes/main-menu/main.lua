@@ -7,6 +7,9 @@ local generateControls = require 'engine.controls.controls'
 -- load a character generator to be initialized with player information
 local generateCharacter = require 'engine.player.character'
 
+-- load dusk
+local dusk = require("Dusk.Dusk")
+
 -- create a new scene object; store locally
 local scene = composer.newScene()
 
@@ -33,8 +36,16 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         
+
+        --load map
+        local map = dusk.buildMap("maps/yi.json")
+        sceneGroup:insert(map)
+
+        -- character
+
         -- initialize the character with relevant information
         -- character -> { object, anim }, where object is the display object, and anim is the animation sequence
+
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         -- set a static location (should be queried from tiled)
         character.object.x = 100
@@ -71,6 +82,7 @@ function scene:show( event )
         local body = { filter=collisionFilter, isSensor=true }
         -- add a physics body to the circle
         physics.addBody ( circle, body )
+        
         -- give the circle an event listener; when it collides, run transitionScene
         circle:addEventListener('collision', transitionScene)
     end
