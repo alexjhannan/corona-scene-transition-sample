@@ -7,6 +7,9 @@ local controls = require 'engine.controls.controls'
 -- load player by pulling from the player module
 local player = require 'engine.player.player'
 
+-- 
+local character = require 'engine.player.character'
+
 -- create a new scene object; store locally
 local scene = composer.newScene()
 
