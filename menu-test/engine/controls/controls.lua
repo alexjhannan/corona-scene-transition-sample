@@ -15,20 +15,33 @@ function controlWrapper(player)
 
 	-- callback functions for controls
 	local function onTapUp() 
-		player.group.y = player.group.y - 10
-		player.anim:setSequence("up") 
+		player.anim:setSequence("up")
+		player.anim:play()
+		timer.performWithDelay(500, function() 
+				player.group.y = player.group.y - 10 
+				player.anim:pause() end)
 	end
 	local function onTapRight() 
-		player.group.x = player.group.x + 10 
-		player.anim:setSequence("right") 
+		player.anim:setSequence("right")
+		player.anim:play()
+		timer.performWithDelay(500, function() 
+				player.group.x = player.group.x + 10 
+				player.anim:pause() end)
 	end
 	local function onTapDown() 
-		player.group.y = player.group.y + 10 
-		player.anim:setSequence("down") 
+		player.anim:setSequence("down")
+		player.anim:play()
+		timer.performWithDelay(500, function() 
+				player.group.y = player.group.y + 10 
+				player.anim:pause() end)
 	end
 	local function onTapLeft() 
-		player.group.x = player.group.x - 10 
-		player.anim:setSequence("left") 
+		player.anim:setSequence("left")
+		player.anim:play()
+		timer.performWithDelay(500, function() 
+				player.group.x = player.group.x - 10 
+				player.anim:pause() end)
+		print()
 	end
 
 	-- attach event listeners
