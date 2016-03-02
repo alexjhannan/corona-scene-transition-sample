@@ -10,6 +10,9 @@ local controls = require 'engine.controls.controls'
 -- 
 local generateCharacter = require 'engine.player.character'
 
+-- load dusk
+local dusk = require("Dusk.Dusk")
+
 -- create a new scene object; store locally
 local scene = composer.newScene()
 
@@ -43,6 +46,10 @@ function scene:show( event )
         --player.x = 100
         --player.y = 100
         
+        --load map
+        local map = dusk.buildMap("maps/yi.json")
+        sceneGroup:insert(map)
+
         -- character
         local character = generateCharacter("Boss","Jedi",1,"Helvetica")
         character.group.x = math.random( 50, display.contentWidth - 50 )
@@ -79,6 +86,7 @@ function scene:show( event )
         local body = { filter=collisionFilter, isSensor=true }
         -- add a physics body to the circle
         physics.addBody ( circle, body )
+        
         -- give the circle an event listener; when it collides, run transitionScene
         circle:addEventListener('collision', transitionScene)
     end
