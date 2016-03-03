@@ -10,14 +10,16 @@ local function generateCharacter( displayName, name, offset, appFont )
 
 	local object = display.newGroup()
 
-	local selOffset = (( (offset or math.random(4)) + 1 ) % 4) * 4
+	-- local selOffset = (( (offset or math.random(4)) + 1 ) % 4) * 4
+	local selOffset = 0
 
+	-- ImageSheet options
 	local sheetOptions = {
-		width = 50,
-		height = 50,
-		numFrames = 64,
-		sheetContentWidth = 800,
-		sheetContentHeight = 200
+		width = 228,
+		height = 316,
+		numFrames = 16,
+		sheetContentWidth = 914,
+		sheetContentHeight = 1267
 	}
 
 
@@ -26,28 +28,28 @@ local function generateCharacter( displayName, name, offset, appFont )
 	local sequences_sprite = {
 		{
 			name = "down",
-			frames = { 1+selOffset, 2+selOffset, 3+selOffset, 1+selOffset, 2+selOffset, 4+selOffset },
+			frames = { 1, 2, 3, 4},
 			time = 600,
 			loopCount = 0,
 			loopDirection = "forward"
 		},
 		{
 			name = "left",
-			frames = { 17+selOffset, 18+selOffset, 19+selOffset, 17+selOffset, 18+selOffset, 20+selOffset },
+			frames = { 13, 14, 15, 16},
 			time = 600,
 			loopCount = 0,
 			loopDirection = "forward"
 		},
 		{
 			name = "right",
-			frames = { 33+selOffset, 34+selOffset, 35+selOffset, 33+selOffset, 34+selOffset, 36+selOffset },
+			frames = { 9, 10, 11, 12},
 			time = 600,
 			loopCount = 0,
 			loopDirection = "forward"
 		},
 		{
 			name = "up",
-			frames = { 49+selOffset, 50+selOffset, 51+selOffset, 49+selOffset, 50+selOffset, 52+selOffset },
+			frames = { 5, 6, 7, 8},
 			time = 600,
 			loopCount = 0,
 			loopDirection = "forward"
